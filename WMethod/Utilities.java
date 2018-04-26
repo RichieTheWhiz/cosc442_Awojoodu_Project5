@@ -22,37 +22,37 @@ public class Utilities{
   
   public static void debugPtable(String s){
     if(pTableDebugSw)
-      System.out.println(s);
+      writeOutput(s);
   }
   
   public static void debugTestingTree(String s){
     if(testingTreeDebugSw)
-      System.out.println(s);
+      writeOutput(s);
   }
   
   public static void debugFSM(String s){
     if(fsmCreationDebugSw)
-      System.out.println(s);
+      writeOutput(s);
   }
   
   public static void debugSort(String s){
 	    if(fsmExecutionDebugSw)
-	        System.out.println(s);
+	        writeOutput(s);
   }
   
   public static void debugFSMExecution(String s){
     if(fsmExecutionDebugSw)
-      System.out.println(s);
+      writeOutput(s);
   }
   
   
   public static void debugWSet(String s){
     if(WSetDebugSw)
-      System.out.println(s);
+      writeOutput(s);
   }
   
   public static void printException(String c, String m, String s){
-    System.out.println("\nException occured. \nClass:"+c +"\nMethod: "+m+"\n"+s);
+    writeOutput("\nException occured. \nClass:"+c +"\nMethod: "+m+"\n"+s);
     System.exit(0);
   }
   
@@ -66,13 +66,31 @@ public class Utilities{
   }// End of existsInVector()  
   
   public static void printAllTestCases(Vector<String> testCases){
-    System.out.println("\nNumber of Test Cases :"+ testCases.size());
+    writeOutput("\nNumber of Test Cases :"+ testCases.size());
     Collections.sort(testCases);
-    System.out.println("Test cases: " + testCases);
+    writeOutput("Test cases: " + testCases);
     
   }// End of printAllTestCases()
   
   
+  public static void writeOutput(String output)  {
+      File opf = new File(".\\Task3\\Task3Results.txt");
+      
+      FileWriter fr = null;
+      try {
+          fr = new FileWriter(opf);
+          fr.write(output);
+      } catch (IOException e) {
+          e.printStackTrace();
+      }finally{
+          //close resources
+          try {
+              fr.close();
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+      }
+  }
   
   public static void runFSM(State [] FSM, int stateID, String input, String separator){
     
