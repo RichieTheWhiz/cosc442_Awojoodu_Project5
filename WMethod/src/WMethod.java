@@ -386,6 +386,24 @@ public class WMethod{
     	 Utilities.runFSM(FSM, 1, tokenSeperator(tests.get(i)), " ");
      }
      
+     int i = 1;
+     boolean containsYes;
+     
+     for (String test : tests) {
+    	 containsYes = Utilities.getOutputPatterns(FSM, 1, test, " ");
+    	 System.out.println("@Test");
+    	 System.out.println("public void testCase" + i + "() {");
+    	 if (containsYes) {
+    		 System.out.println("    assertTrue(jb.bondRegex(\"" + test + "\"));");
+    	 }
+    	 else {
+    		 System.out.println("    assertFalse(jb.bondRegex(\"" + test + "\"));");
+    	 }
+    	 System.out.println("}");
+    	 System.out.println();
+    	 i++;
+     }
+     
    }// End of main()
    
    public static String tokenSeperator(String substring) {
